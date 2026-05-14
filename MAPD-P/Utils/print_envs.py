@@ -5,7 +5,6 @@ import argparse
 import os
 from matplotlib.lines import Line2D
 
-# --- FIX: Register the python/tuple tag for safe_load ---
 def python_tuple_constructor(loader, node):
     return tuple(loader.construct_sequence(node))
 
@@ -37,7 +36,7 @@ def visualize_warehouse(yaml_path):
     # 2. Draw Obstacles (Black Cells)
     for obs in data['map']['obstacles']:
         y, x = obs
-        rect = plt.Rectangle((x - 0.5, y - 0.5), 1, 1, color='black')
+        rect = plt.Rectangle((x - 0.2, y - 0.2), 0.4, 0.4, color='black')
         ax.add_patch(rect)
 
     # 3. Draw Pickups (Cyan Squares)

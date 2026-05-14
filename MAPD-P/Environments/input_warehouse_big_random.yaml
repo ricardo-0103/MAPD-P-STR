@@ -19,66 +19,66 @@ agents:
     name: agent8
   - start: [24, 9]
     name: agent9
-  - start: [24, 11]
-    name: agent10
-  - start: [24, 15]
-    name: agent11
-  - start: [2, 1]
-    name: agent12
-  - start: [2, 15]
-    name: agent13
-  - start: [2, 35]
-    name: agent14
-  - start: [22, 1]
-    name: agent15
-  - start: [22, 15]
-    name: agent16
-  - start: [22, 35]
-    name: agent17
-  - start: [24, 21]
-    name: agent18
-  - start: [24, 25]
-    name: agent19
-  - start: [24, 27]
-    name: agent20
-  - start: [24, 29]
-    name: agent21
-  - start: [24, 31]
-    name: agent22
-  - start: [24, 35]
-    name: agent23
-  - start: [0, 21]
-    name: agent24
-  - start: [0, 25]
-    name: agent25
-  - start: [0, 27]
-    name: agent26
-  - start: [0, 29]
-    name: agent27
-  - start: [0, 31]
-    name: agent28
-  - start: [0, 35]
-    name: agent29
-  - start: [22, 5]
-    name: agent30
-  - start: [22, 9]
-    name: agent31
-  - start: [22, 21]
-    name: agent32
-  - start: [22, 27]
-    name: agent33
-  - start: [22, 31]
-    name: agent34
-  - start: [2, 5]
-    name: agent35
-  - start: [2, 9]
-    name: agent36
-  - start: [2, 21]
-    name: agent37
-  - start: [2, 27]
-    name: agent38
-  - start: [2, 31]
-    name: agent39
+  # - start: [24, 11]
+  #   name: agent10
+  # - start: [24, 15]
+  #   name: agent11
+  # - start: [2, 1]
+  #   name: agent12
+  # - start: [2, 15]
+  #   name: agent13
+  # - start: [2, 35]
+  #   name: agent14
+  # - start: [22, 1]
+  #   name: agent15
+  # - start: [22, 15]
+  #   name: agent16
+  # - start: [22, 35]
+  #   name: agent17
+  # - start: [24, 21]
+  #   name: agent18
+  # - start: [24, 25]
+  #   name: agent19
+  # - start: [24, 27]
+  #   name: agent20
+  # - start: [24, 29]
+  #   name: agent21
+  # - start: [24, 31]
+  #   name: agent22
+  # - start: [24, 35]
+  #   name: agent23
+  # - start: [0, 21]
+  #   name: agent24
+  # - start: [0, 25]
+  #   name: agent25
+  # - start: [0, 27]
+  #   name: agent26
+  # - start: [0, 29]
+  #   name: agent27
+  # - start: [0, 31]
+  #   name: agent28
+  # - start: [0, 35]
+  #   name: agent29
+  # - start: [22, 5]
+  #   name: agent30
+  # - start: [22, 9]
+  #   name: agent31
+  # - start: [22, 21]
+  #   name: agent32
+  # - start: [22, 27]
+  #   name: agent33
+  # - start: [22, 31]
+  #   name: agent34
+  # - start: [2, 5]
+  #   name: agent35
+  # - start: [2, 9]
+  #   name: agent36
+  # - start: [2, 21]
+  #   name: agent37
+  # - start: [2, 27]
+  #   name: agent38
+  # - start: [2, 31]
+  #   name: agent39
 map:
   dimensions: [25, 37]
   obstacles:

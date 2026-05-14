@@ -10,12 +10,15 @@ from Simulation.CBS.cbs import CBS, Environment
 
 class TokenPassingRecovery(object):
     def __init__(self, agents, dimesions, obstacles, non_task_endpoints, simulation, starts, a_star_max_iter=800000000,
-                 path_1_modified=False, path_2_modified=False, preemption_radius=0, preemption_duration=0):
+                 path_1_modified=False, path_2_modified=False, preemption_radius=0, preemption_duration=0, path_1_str=False, path_2_str=False, noise_level=0.0):
         self.agents = agents
         self.starts = starts
         self.dimensions = dimesions
         self.path_1_modified = path_1_modified
         self.path_2_modified = path_2_modified
+        self.path_1_str = path_1_str  
+        self.path_2_str = path_2_str  
+        self.noise_level = noise_level
         self.preemption_radius = preemption_radius
         self.preemption_duration = preemption_duration
         preemption_zones = {}
@@ -179,7 +182,7 @@ class TokenPassingRecovery(object):
                 locations.append(location)
         return list(locations)
 
-    def get_best_idle_location(self, agent_pos, best_task=None):
+    def get_best_idle_location(self, agent_pos, best_task=None, agent_name=None):
         dist = -1
         res = [-1, -1]
         if best_task is not None and tuple(agent_pos) in self.starts and best_task in self.preempted_locations[
@@ -198,7 +201,54 @@ class TokenPassingRecovery(object):
                                        self.task_distribution.shape[3])):
                         for location in preemption_zone:
                             x = x + self.task_distribution[0, location[0], location[1], t]
-                    tmp = x / ((distance + self.preemption_duration))
+                    # Baseline p score
+                    base_p = x / ((distance + self.preemption_duration))
+
+                    # --- /// NOISE INJECTION ---
+                    if self.noise_level > 0:
+                        import random
+                        # Add random noise to the base probability, but don't let it drop below 0
+                        base_p = max(0, base_p + random.uniform(-self.noise_level, self.noise_level))
+                    # -----------------------------------
+
+                    tmp = base_p
+
+                    # --- /// TP-m2-STR INJECTION ---
+                    if self.path_2_str and agent_name is not None:
+                        d_max = self.dimensions[0] + self.dimensions[1]  # Maximum possible distance in the grid
+                        n_agents = len(self.token['agents'])
+                        alpha = 1  # Hyperparameter: Weight of the regret multiplier
+                        r_max = 1 + alpha * math.log(max(1, d_max / n_agents))
+                        
+                        # d1: Spatial distance of the evaluating agent to location s (min 1)
+                        d1 = max(self.admissible_heuristic([i, j], agent_pos), 1)
+                        
+                        # d2: Effective Temporal Distance (ED) of the closest peer
+                        min_ed = math.inf
+                        for peer_name, peer_path in self.token['agents'].items():
+                            if peer_name != agent_name:
+                                # Length of remaining path (idle agents have len 1, so len-1 = 0)
+                                remaining_path_len = len(peer_path) - 1
+                                final_pos = peer_path[-1]
+                                
+                                # ED = path remaining + distance from final pos to s
+                                ed = remaining_path_len + self.admissible_heuristic(final_pos, [i, j])
+                                if ed < min_ed:
+                                    min_ed = ed
+                                    
+                        d2 = max(min_ed, 1)
+                        
+                        # Regret Multiplier Rs = min(d2 / d1, Rmax)
+                        rs = min(d2 / d1, r_max)
+                        
+                        # Calculate final score
+                        tmp = tmp * rs
+
+                        # --- NOTE: DEBUG PRINT --- 
+                        # if base_p > 0: # Only print locations that actually have a chance of spawning a task
+                            # print(f"[TP-m2-STR] {agent_name} evaluating {i},{j} | base_p: {base_p:.4f} | d1: {d1} | d2: {d2} | Rs: {rs:.2f} | Final Score: {tmp:.4f}")
+                    # ---------------------------
+
                     if dist == -1:
                         dist = tmp
                         res = [i, j]
@@ -215,6 +265,14 @@ class TokenPassingRecovery(object):
             return best_task
         elif best_task is not None:
             True  # self.print("agent at " + str(agent_pos) + "preferred probability of " + str(res) + " to task" + str(best_task))
+
+        # --- NOTE: FINAL DECISION DEBUG PRINT ---
+        # You can safely comment out this entire block, and the code will run normally
+        # if agent_name is not None and res != [-1, -1]:
+        #     mode = "TP-m2-STR" if self.path_2_str else "TP-m2"
+        #     print(f"   >>> [{mode} FINAL DECISION] {agent_name} is moving to {res} | Winning Score: {dist:.4f}")
+        # ---------------------------------------
+
         return res
 
     def update_ends(self, agent_pos):
@@ -253,7 +311,8 @@ class TokenPassingRecovery(object):
         x = None
         closest_non_task_endpoint = None
         if path_modified:
-            closest_non_task_endpoint = self.get_best_idle_location(agent_pos)
+            closest_non_task_endpoint = self.get_best_idle_location(agent_pos, 
+                                                                    best_task=None, agent_name=agent_name)
             x = closest_non_task_endpoint
         if closest_non_task_endpoint is None:  # or self.simulation.time > 100:
             closest_non_task_endpoint = self.get_closest_non_task_endpoint(agent_pos)
@@ -397,7 +456,9 @@ class TokenPassingRecovery(object):
                     closest_task_name = self.get_closest_task_name(available_tasks, agent_pos)
                     closest_task = available_tasks[closest_task_name]
                     if preemption_duration == 0 and self.path_1_modified and self.admissible_heuristic(
-                            self.get_best_idle_location(agent_pos, closest_task[0]),
+                            self.get_best_idle_location(agent_pos, 
+                                                        closest_task[0], 
+                                                        agent_name=agent_name),
                             agent_pos) < self.admissible_heuristic(closest_task[0], agent_pos):
                         self.go_to_closest_non_task_endpoint(agent_name, agent_pos, all_idle_agents, True)
                         x = 0

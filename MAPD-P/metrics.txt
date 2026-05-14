@@ -1,0 +1,58 @@
+
+************** Figure 3
+    TP
+CONFIG: tasks=80, freq=0.05, m1=False, m2=False, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 52.08 | Agents Cost: 50.519 | Runtime: 0.37 | Makespan: 1657.65
+--------------------------------------------------------------------------------
+    TP-m2
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 33.40 |Cost of the solution per task: 95.85 | Runtime: 20.43 | Makespan: 1635.90
+--------------------------------------------------------------------------------
+    TP-m1
+CONFIG: tasks=80, freq=0.05, m1=True, m2=False, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 46.14 |Cost of the solution per task: 48.89 | Runtime: 0.62 | Makespan: 1648.95
+--------------------------------------------------------------------------------
+    TP-m
+CONFIG: tasks=80, freq=0.05, m1=True, m2=True, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 33.31 |Cost of the solution per task: 96.04 | Runtime: 20.33 | Makespan: 1636.90
+--------------------------------------------------------------------------------
+    TP-m2p
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, preemption_dist=3, preemption_dur=3
+RESULTS: Avg Service Time: 35.90 |Cost of the solution per task: 103.51 | Runtime: 9.60 | Makespan: 1638.45
+--------------------------------------------------------------------------------
+    TP-m1p
+CONFIG: tasks=80, freq=0.05, m1=True, m2=False, preemption_dist=3, preemption_dur=3
+RESULTS: Avg Service Time: 46.49 |Cost of the solution per task: 50.00 | Runtime: 0.83 | Makespan: 1654.45
+--------------------------------------------------------------------------------
+    TP-mp
+CONFIG: tasks=80, freq=0.05, m1=True, m2=True, preemption_dist=3, preemption_dur=3
+RESULTS: Avg Service Time: 36.46 |Cost of the solution per task: 103.25 | Runtime: 31.50 | Makespan: 1638.25
+--------------------------------------------------------------------------------
+
+************** Figure 4 (Task frequencies TP and TP-m2)
+    TP
+CONFIG: tasks=80, freq=0.05, m1=False, m2=False, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 52.08 |Cost of the solution per task: 50.52 | Runtime: 0.35 | Makespan: 1657.65
+--------------------------------------------------------------------------------
+CONFIG: tasks=80, freq=0.1, m1=False, m2=False, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 54.31 |Cost of the solution per task: 50.88 | Runtime: 0.46 | Makespan: 870.35
+--------------------------------------------------------------------------------
+CONFIG: tasks=80, freq=0.2, m1=False, m2=False, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 60.37 |Cost of the solution per task: 48.77 | Runtime: 0.54 | Makespan: 504.85
+--------------------------------------------------------------------------------
+CONFIG: tasks=80, freq=0.5, m1=False, m2=False, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 128.95 |Cost of the solution per task: 44.24 | Runtime: 0.41 | Makespan: 411.50
+--------------------------------------------------------------------------------
+    TP-m2
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 33.40 |Cost of the solution per task: 95.85 | Runtime: 19.85 | Makespan: 1635.90
+--------------------------------------------------------------------------------
+CONFIG: tasks=80, freq=0.1, m1=False, m2=True, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 37.13 |Cost of the solution per task: 82.84 | Runtime: 5.69 | Makespan: 849.65
+--------------------------------------------------------------------------------
+CONFIG: tasks=80, freq=0.2, m1=False, m2=True, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 52.61 |Cost of the solution per task: 58.60 | Runtime: 1.74 | Makespan: 507.20
+--------------------------------------------------------------------------------
+CONFIG: tasks=80, freq=0.5, m1=False, m2=True, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 126.88 |Cost of the solution per task: 48.08 | Runtime: 1.61 | Makespan: 434.40
+--------------------------------------------------------------------------------

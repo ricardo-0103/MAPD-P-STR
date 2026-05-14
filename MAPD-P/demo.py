@@ -14,9 +14,23 @@ from Simulation.TP_with_recovery import TokenPassingRecovery
 from Simulation.simulation_new_recovery import SimulationNewRecovery
 
 if __name__ == '__main__':
+
+    # Set random seed for reproducibility
+    random.seed(42)
+    numpy.random.seed(42)
+                      
     parser = argparse.ArgumentParser()
     parser.add_argument('-m1', help='Modify Path1', default=False, type=bool)
     parser.add_argument('-m2', help='Modify Path2', default=False, type=bool)
+    # --- /// STR -------------------------
+    parser.add_argument('-m1_STR', help='Use Spatio-Temporal Regret for Path1',         
+                        default=False, type=bool)
+    parser.add_argument('-m2_STR', help='Use Spatio-Temporal Regret for Path2', 
+                        default=False, type=bool)
+    # --- /// Noise -------------------------
+    parser.add_argument('-noise', help='Noise level added to the task probability prediction', 
+                        default=0.0, type=float)
+    # -----------------------------------
     parser.add_argument('-preemption_distance', help='Maximum distance to be part of the preemption zone',
                         default=0, type=int)
     parser.add_argument('-preemption_duration', help='Preemption duration',
@@ -29,10 +43,24 @@ if __name__ == '__main__':
                         default=0.2, type=float)
     args = parser.parse_args()
 
+    # Automatically enable the base predictive logic if STR is requested
+    if args.m1_STR:
+        args.m1 = True
+    if args.m2_STR:
+        args.m2 = True
+    # ----------------------
+
     number_of_tasks = args.tasks
     tasks_frequency = args.task_frequency
     print("Number of tasks:", number_of_tasks)
     print("Task frequency", tasks_frequency)
+
+    # --- Global accumulators ---
+    global_avg_service_times = []
+    global_agents_costs = []
+    global_runtime_costs = []
+    global_makespans = []
+
     for i in range(20):
         with open(os.path.join(RoothPath.get_root(), 'config.json'), 'r') as json_file:
             config = json.load(json_file)
@@ -97,6 +125,12 @@ if __name__ == '__main__':
                                   param['map']['start_locations'],
                                   a_star_max_iter=args.a_star_max_iter, path_1_modified=args.m1,
                                   path_2_modified=args.m2,
+                                  # --- ///STR arguments ---------
+                                  path_1_str=args.m1_STR,
+                                  path_2_str=args.m2_STR,
+                                  # --- ///Noise level arguments ---------
+                                  noise_level=args.noise,
+                                  # ---------------------------
                                   preemption_radius=args.preemption_distance,
                                   preemption_duration=args.preemption_duration)
 
@@ -149,3 +183,37 @@ if __name__ == '__main__':
         avg_service_time = mean(service_times)
         print("Average service time:", avg_service_time, ". Standard deviation: ", ". Agents cost: ", agents_cost,
               ". Runtime cost:", runtime, ". Makespan:", simulation.time)
+        
+        # --- Save metrics for the global average ---
+        global_avg_service_times.append(avg_service_time)
+        global_agents_costs.append(agents_cost)
+        global_runtime_costs.append(runtime)
+        global_makespans.append(simulation.time)
+
+    # --- Print global averages ---
+    print("\n" + "="*80)
+    print("GLOBAL AVERAGES OVER 20 RUNS:")
+    print("Average service time:", mean(global_avg_service_times), 
+          ". Cost of the solution per task:", mean(global_agents_costs) / args.tasks, 
+          ". Runtime cost:", mean(global_runtime_costs), 
+          ". Makespan:", mean(global_makespans))
+    print("="*80)
+
+    # --- Save metrics to a text file, to keep track of results ---
+    # Append the results and configuration to a text file
+    metrics_filename = "metrics_test.txt"
+    
+    # Calculate final averages
+    final_service_time = mean(global_avg_service_times)
+    final_agents_cost_per_task = mean(global_agents_costs) / args.tasks  # Normalize by number of tasks
+    final_runtime = mean(global_runtime_costs)
+    final_makespan = mean(global_makespans)
+
+    # Open the file in 'a' (append) mode so it doesn't overwrite previous runs
+    with open(metrics_filename, 'a') as f:
+        # Write the configuration used
+        f.write(f"CONFIG: tasks={args.tasks}, freq={args.task_frequency}, m1={args.m1}, m2={args.m2}, m1_STR={args.m1_STR}, m2_STR={args.m2_STR}, noise={args.noise}, preemption_dist={args.preemption_distance}, preemption_dur={args.preemption_duration}\n")
+        # Write the resulting metrics
+        f.write(f"RESULTS: Avg Service Time: {final_service_time:.2f} |Cost of the solution per task: {final_agents_cost_per_task:.2f} | Runtime: {final_runtime:.2f} | Makespan: {final_makespan:.2f}\n")
+        f.write("-" * 80 + "\n")
+    # --------------------------------------------------
