@@ -27,3 +27,15 @@ Average service time: 53.1575 . Cost of the solution per task: 206.940625 . Runt
 CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.4, preemption_dist=0, preemption_dur=0
 RESULTS: Avg Service Time: 52.20 |Cost of the solution per task: 206.21 | Runtime: 6.82 | Makespan: 1661.80
 --------------------------------------------------------------------------------
+CONFIG: tasks=10, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 4.85 |Cost of the solution per task: 11.72 | Runtime: 0.01 | Makespan: 203.15
+--------------------------------------------------------------------------------
+CONFIG: tasks=10, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=False, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 4.85 |Cost of the solution per task: 11.72 | Runtime: 0.01 | Makespan: 203.15
+--------------------------------------------------------------------------------
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 33.45 |Cost of the solution per task: 97.00 | Runtime: 23.22 | Makespan: 1634.75
+--------------------------------------------------------------------------------
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.4, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 52.26 |Cost of the solution per task: 202.81 | Runtime: 7.84 | Makespan: 1653.90
+--------------------------------------------------------------------------------

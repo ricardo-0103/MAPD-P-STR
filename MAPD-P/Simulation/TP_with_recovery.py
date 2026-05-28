@@ -213,12 +213,9 @@ class TokenPassingRecovery(object):
 
                     tmp = base_p
 
-                    # --- /// TP-m2-STR INJECTION ---
+                    # --- /// TP-m2-STR INJECTION (Piecewise Logarithmic) ---
                     if self.path_2_str and agent_name is not None:
-                        d_max = self.dimensions[0] + self.dimensions[1]  # Maximum possible distance in the grid
-                        n_agents = len(self.token['agents'])
-                        alpha = 1  # Hyperparameter: Weight of the regret multiplier
-                        r_max = 1 + alpha * math.log(max(1, d_max / n_agents))
+                        alpha = 1.0  # Hyperparameter: Controls the steepness of the logarithmic boost
                         
                         # d1: Spatial distance of the evaluating agent to location s (min 1)
                         d1 = max(self.admissible_heuristic([i, j], agent_pos), 1)
@@ -238,11 +235,16 @@ class TokenPassingRecovery(object):
                                     
                         d2 = max(min_ed, 1)
                         
-                        # Regret Multiplier Rs = min(d2 / d1, Rmax)
-                        rs = min(d2 / d1, r_max)
+                        # --- NEW: Piecewise Regret Multiplier Rs ---
+                        if d2 < d1:
+                            rs = d2 / d1
+                        else:
+                            rs = 1 + alpha * math.log(d2 / d1)
+                        # -------------------------------------------
                         
                         # Calculate final score
                         tmp = tmp * rs
+                    # -------------------------------------------------------
 
                         # --- NOTE: DEBUG PRINT --- 
                         # if base_p > 0: # Only print locations that actually have a chance of spawning a task
