@@ -260,13 +260,44 @@ class TokenPassingRecovery(object):
                             res = [i, j]
         if res == [-1, -1]:
             return best_task
-        # exit(1)
-        if best_task is not None and 1 / (  # len(self.get_preemption_zone(res)) / (
-                self.admissible_heuristic(agent_pos, best_task) + 1 + self.preemption_duration) >= dist:
-            #  #self.print("agent at " + str(agent_pos) + "selects preempted task " + str(best_task))
-            return best_task
-        elif best_task is not None:
-            True  # self.print("agent at " + str(agent_pos) + "preferred probability of " + str(res) + " to task" + str(best_task))
+
+        # Evaluate the real task vs the best speculative location
+        if best_task is not None:
+            # Base t_score (attractiveness of the real task)
+            t_score = 1 / (self.admissible_heuristic(agent_pos, best_task) + 1 + self.preemption_duration)
+
+            # --- /// TP-m1-STR INJECTION ---
+            if self.path_1_str and agent_name is not None:
+                alpha = 1.0  # Hyperparameter
+                
+                # d1_task: Spatial distance of evaluating agent to the real task (min 1)
+                d1_task = max(self.admissible_heuristic(best_task, agent_pos), 1)
+                
+                # d2_task: Effective Temporal Distance of the closest peer to the real task
+                min_ed_task = math.inf
+                for peer_name, peer_path in self.token['agents'].items():
+                    if peer_name != agent_name:
+                        rem_len = len(peer_path) - 1
+                        f_pos = peer_path[-1]
+                        ed_task = rem_len + self.admissible_heuristic(f_pos, best_task)
+                        if ed_task < min_ed_task:
+                            min_ed_task = ed_task
+                            
+                d2_task = max(min_ed_task, 1)
+                
+                # Piecewise Regret Multiplier for the Real Task
+                if d2_task < d1_task:
+                    r_task = d2_task / d1_task
+                else:
+                    r_task = 1 + alpha * math.log(d2_task / d1_task)
+                
+                # Inflate the task score to prevent starvation
+                t_score = t_score * r_task
+            # -------------------------------
+
+            # Decision Rule: Does the task beat the best speculative location?
+            if t_score >= dist:
+                return best_task
 
         # --- NOTE: FINAL DECISION DEBUG PRINT ---
         # You can safely comment out this entire block, and the code will run normally

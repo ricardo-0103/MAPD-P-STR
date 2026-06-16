@@ -201,7 +201,7 @@ if __name__ == '__main__':
 
     # --- Save metrics to a text file, to keep track of results ---
     # Append the results and configuration to a text file
-    metrics_filename = "metrics_test.txt"
+    metrics_filename = "metrics_TP_m1.txt"
     
     # Calculate final averages
     final_service_time = mean(global_avg_service_times)
