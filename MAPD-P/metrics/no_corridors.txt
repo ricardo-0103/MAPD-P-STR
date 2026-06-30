@@ -1,0 +1,60 @@
+Big House Environment (no corridors)
+10 agents, 80 tasks, 0.05 task frequency 
+
+                    Zero noise 
+*****    Base TP
+CONFIG: tasks=80, freq=0.05, m1=False, m2=False, m1_STR=False, m2_STR=False, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 52.08 |Cost of the solution per task: 50.52 | Runtime: 0.37 | Makespan: 1657.65
+--------------------------------------------------------------------------------
+*****    TP-m2
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=False, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 33.40 |Cost of the solution per task: 95.85 | Runtime: 19.77 | Makespan: 1635.90
+--------------------------------------------------------------------------------
+*****    TP-m2_STR (Piecewise Regret Multiplier)
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 33.45 |Cost of the solution per task: 97.00 | Runtime: 22.16 | Makespan: 1634.75
+--------------------------------------------------------------------------------
+
+                  20% noise
+*****    TP-m2 
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=False, noise=0.2, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 51.67 |Cost of the solution per task: 207.09 | Runtime: 5.87 | Makespan: 1657.05
+--------------------------------------------------------------------------------
+*****    TP-m2_STR (Piecewise Regret Multiplier)
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.2, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 49.90 |Cost of the solution per task: 203.17 | Runtime: 7.56 | Makespan: 1658.25
+--------------------------------------------------------------------------------
+
+                    50% noise
+*****    TP-m2 
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=False, noise=0.5, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 53.54 |Cost of the solution per task: 207.61 | Runtime: 6.17 | Makespan: 1661.20
+--------------------------------------------------------------------------------
+*****    TP-m2_STR (Piecewise Regret Multiplier)
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.5, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 52.00 |Cost of the solution per task: 203.29 | Runtime: 7.67 | Makespan: 1658.60
+--------------------------------------------------------------------------------
+               
+                    80% noise
+*****    TP-m2
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=False, noise=0.8, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 55.12 |Cost of the solution per task: 207.80 | Runtime: 6.04 | Makespan: 1662.70
+--------------------------------------------------------------------------------
+*****    TP-m2_STR (Piecewise Regret Multiplier)
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.8, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 53.48 |Cost of the solution per task: 203.20 | Runtime: 7.71 | Makespan: 1657.25
+--------------------------------------------------------------------------------
+
+20 agents (over-saturated) and 20% noise
+*****    Base TP
+CONFIG: tasks=80, freq=0.05, m1=False, m2=False, m1_STR=False, m2_STR=False, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 52.57 |Cost of the solution per task: 50.91 | Runtime: 0.41 | Makespan: 1649.70
+--------------------------------------------------------------------------------
+*****    TP-m2
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=False, noise=0.2, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 48.80 |Cost of the solution per task: 413.10 | Runtime: 19.85 | Makespan: 1652.85
+--------------------------------------------------------------------------------
+*****    TP-m2_STR (Piecewise Regret Multiplier)
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.2, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 46.43 |Cost of the solution per task: 404.28 | Runtime: 21.96 | Makespan: 1657.80
+--------------------------------------------------------------------------------

@@ -19,26 +19,26 @@ agents:
     name: agent8
   - start: [24, 9]
     name: agent9
-  # - start: [24, 11]
-  #   name: agent10
-  # - start: [24, 15]
-  #   name: agent11
-  # - start: [2, 1]
-  #   name: agent12
-  # - start: [2, 15]
-  #   name: agent13
-  # - start: [2, 35]
-  #   name: agent14
-  # - start: [22, 1]
-  #   name: agent15
-  # - start: [22, 15]
-  #   name: agent16
-  # - start: [22, 35]
-  #   name: agent17
-  # - start: [24, 21]
-  #   name: agent18
-  # - start: [24, 25]
-  #   name: agent19
+  - start: [24, 11]
+    name: agent10
+  - start: [24, 15]
+    name: agent11
+  - start: [2, 1]
+    name: agent12
+  - start: [2, 15]
+    name: agent13
+  - start: [2, 35]
+    name: agent14
+  - start: [22, 1]
+    name: agent15
+  - start: [22, 15]
+    name: agent16
+  - start: [22, 35]
+    name: agent17
+  - start: [24, 21]
+    name: agent18
+  - start: [24, 25]
+    name: agent19
   # - start: [24, 27]
   #   name: agent20
   # - start: [24, 29]

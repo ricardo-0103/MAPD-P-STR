@@ -1,0 +1,54 @@
+Big House Environment (no corridors)
+10 agents, 80 tasks, 0.05 task frequency 
+
+                    Zero noise 
+*****    Base TP
+CONFIG: tasks=80, freq=0.05, m1=False, m2=False, m1_STR=False, m2_STR=False, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 52.08 |Cost of the solution per task: 50.52 | Runtime: 0.37 | Makespan: 1657.65
+--------------------------------------------------------------------------------
+*****    TP-m2
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=False, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 33.40 |Cost of the solution per task: 95.85 | Runtime: 19.77 | Makespan: 1635.90
+--------------------------------------------------------------------------------
+*****    TP-m2_STR (Piecewise Regret Multiplier)
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 33.45 |Cost of the solution per task: 97.00 | Runtime: 22.16 | Makespan: 1634.75
+--------------------------------------------------------------------------------
+
+                    50% noise
+*****    TP-m2 
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=False, noise=0.5, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 53.54 |Cost of the solution per task: 207.61 | Runtime: 6.17 | Makespan: 1661.20
+--------------------------------------------------------------------------------
+*****    TP-m2_STR (Piecewise Regret Multiplier)
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.5, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 52.00 |Cost of the solution per task: 203.29 | Runtime: 7.67 | Makespan: 1658.60
+--------------------------------------------------------------------------------
+
+
+Big House Environment with middle corridors
+10 agents, 80 tasks, 0.05 task frequency 
+
+                    Zero noise 
+*****    Base TP
+CONFIG: tasks=80, freq=0.05, m1=False, m2=False, m1_STR=False, m2_STR=False, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 52.13 |Cost of the solution per task: 50.70 | Runtime: 0.31 | Makespan: 1662.05
+--------------------------------------------------------------------------------
+*****    TP-m2
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=False, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 31.14 |Cost of the solution per task: 95.46 | Runtime: 14.82 | Makespan: 1633.30
+--------------------------------------------------------------------------------
+*****    TP-m2_STR (Piecewise Regret Multiplier)
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.0, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 30.65 |Cost of the solution per task: 94.34 | Runtime: 16.52 | Makespan: 1632.05
+--------------------------------------------------------------------------------
+
+                    50% noise
+*****    TP-m2 
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=False, noise=0.5, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 48.25 |Cost of the solution per task: 206.11 | Runtime: 3.35 | Makespan: 1649.35
+--------------------------------------------------------------------------------
+*****    TP-m2_STR (Piecewise Regret Multiplier)
+CONFIG: tasks=80, freq=0.05, m1=False, m2=True, m1_STR=False, m2_STR=True, noise=0.5, preemption_dist=0, preemption_dur=0
+RESULTS: Avg Service Time: 46.69 |Cost of the solution per task: 201.11 | Runtime: 5.18 | Makespan: 1651.85
+--------------------------------------------------------------------------------
